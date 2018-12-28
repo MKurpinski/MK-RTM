@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using OAuthAuthorization.Filters;
 
 namespace OAuthAuthorization
 {
@@ -7,6 +8,7 @@ namespace OAuthAuthorization
         public static void Register(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
+            config.Filters.Add(new LogActionFilterAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
