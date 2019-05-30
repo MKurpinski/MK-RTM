@@ -15,7 +15,8 @@ namespace OAuthAuthorization.Extensions
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
-                Provider = new OAuthAuthorizationProvider()
+                Provider = new OAuthAuthorizationProvider(),
+                RefreshTokenProvider = new RefreshTokenProvider()
             };
 
             app.UseOAuthAuthorizationServer(oAuthServerOptions);

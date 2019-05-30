@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 
 namespace OAuthAuthorization.Providers
@@ -25,6 +26,13 @@ namespace OAuthAuthorization.Providers
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
             context.Validated(identity);
+        }
+        public override async Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
+        {
+            var newId = new ClaimsIdentity(context.Ticket.Identity);
+            var newTicket = new AuthenticationTicket(newId, context.Ticket.Properties);
+
+            context.Validated(newTicket);
         }
     }
 }
